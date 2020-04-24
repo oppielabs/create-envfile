@@ -1,12 +1,10 @@
 import os
+import base64
 
-env_keys = list(dict(os.environ).keys())
+encoded_env_file = os.environ.get("INPUT_ENV_FILE")
 
-out_file = ""
+if encoded_env_file != None:
+    decoded_env_file = base64.b64decode(encoded_env_file).decode('utf-8')
 
-for key in env_keys:
-    if key.startswith("INPUT_ENVKEY_"):
-        out_file += key.split("INPUT_ENVKEY_")[1] + "=" + os.environ.get(key) + "\n"
-
-with open("/github/workspace/" + str(os.environ.get("INPUT_FILE_NAME")), "w") as text_file:
-    text_file.write(out_file)
+    with open("/github/workspace/" + str(os.environ.get("INPUT_FILE_NAME", ".env")), "w") as text_file:
+        text_file.write(decoded_env_file)

@@ -1,6 +1,6 @@
   name: 'Create .env file'
   description: 'Github Action to create a .env file with Github Secrets'
-  author: 'Forest Anderson'
+  author: 'Forest Anderson, Pat Migliaccio <pat@oppie.io>'
   inputs:
     file_name:
       description: 'The filename for the envfile'
